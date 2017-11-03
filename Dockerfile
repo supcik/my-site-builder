@@ -1,7 +1,7 @@
 FROM ubuntu
 
 LABEL maintainer="jacques@supcik.net"
-LABEL version="1.0"
+LABEL version="1.0.1"
 ENV GOLANG_VERSION 1.9.2
 
 ENV PATH /root/bin:/usr/local/go/bin:$PATH
@@ -20,9 +20,12 @@ RUN \
     pip install pygments; \
     go get github.com/kardianos/govendor; \
     govendor get github.com/gohugoio/hugo; \
-    go install github.com/gohugoio/hugo
+    go install github.com/gohugoio/hugo; \
+    go get -u github.com/tcnksm/ghr; \
+    go install github.com/tcnksm/ghr
 
 RUN \
     go version; \
     hugo version; \
-    pygmentize -V
+    pygmentize -V; \
+    ghr -version
